@@ -68,7 +68,7 @@ Create flowcharts for a shopping cart with offline support
 
 ## Need Help?
 
-- 📖 [Full Documentation](README.md)
+- 📖 [Full Documentation](../README.md)
 - 🔧 [Installation Issues](INSTALLATION.md)
 - 🐛 [Report Bug](https://github.com/SwiftyJourney/requirements-engineering-skill/issues)
 

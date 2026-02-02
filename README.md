@@ -57,7 +57,7 @@ git clone https://github.com/SwiftyJourney/requirements-engineering-skill.git
 # Follow Windsurf's skills installation guide
 ```
 
-See the [Installation Guide](INSTALLATION.md) for detailed instructions.
+See the [Installation Guide](docs/INSTALLATION.md) for detailed instructions.
 
 ## Quick Start
 
@@ -233,9 +233,9 @@ This skill helps you:
 
 ## Documentation
 
-- 📖 [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
-- 🔧 [Installation Guide](INSTALLATION.md) - Detailed install for all tools
-- 🤝 [Contributing](CONTRIBUTING.md) - How to contribute
+- 📖 [Quick Start Guide](docs/QUICKSTART.md) - Get started in 5 minutes
+- 🔧 [Installation Guide](docs/INSTALLATION.md) - Detailed install for all tools
+- 🤝 [Contributing](docs/CONTRIBUTING.md) - How to contribute
 
 ## Contributing
 
@@ -246,7 +246,7 @@ Contributions are welcome! Whether you want to:
 - Enhance diagram examples
 - Fix documentation
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
 ## License
 
