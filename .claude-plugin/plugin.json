@@ -1,0 +1,26 @@
+{
+  "name": "requirements-engineering",
+  "version": "2.0.0",
+  "description": "Transform vague requirements into well-defined, testable specifications using BDD narratives, use cases, model specs, payload contracts, and diagrams. Based on Essential Developer methodology.",
+  "author": {
+    "name": "SwiftyJourney",
+    "email": "jfdoradotr@icloud.com"
+  },
+  "repository": "https://github.com/SwiftyJourney/requirements-engineering-skill",
+  "license": "MIT",
+  "keywords": [
+    "requirements",
+    "bdd",
+    "use-cases",
+    "essential-developer",
+    "specifications",
+    "behavior-driven-development",
+    "mermaid",
+    "documentation",
+    "model-specs",
+    "payload-contracts"
+  ],
+  "skills": [
+    "./requirements-engineering"
+  ]
+}

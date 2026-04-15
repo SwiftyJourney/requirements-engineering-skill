@@ -1,0 +1,44 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "requirements-engineering-skill",
+  "version": "2.0.0",
+  "owner": {
+    "name": "SwiftyJourney",
+    "email": "jfdoradotr@icloud.com"
+  },
+  "metadata": {
+    "description": "Transform vague requirements into well-defined, testable specifications using BDD, use cases, model specs, payload contracts, flowcharts, and architecture diagrams."
+  },
+  "plugins": [
+    {
+      "name": "requirements-engineering",
+      "description": "Transform vague requirements into well-defined, testable specifications using BDD narratives, use cases, model specs, payload contracts, and diagrams. Based on Essential Developer methodology.",
+      "repository": "https://github.com/SwiftyJourney/requirements-engineering-skill",
+      "version": "2.0.0",
+      "author": {
+        "name": "SwiftyJourney",
+        "email": "jfdoradotr@icloud.com"
+      },
+      "license": "MIT",
+      "category": "development",
+      "keywords": [
+        "requirements",
+        "bdd",
+        "use-cases",
+        "essential-developer",
+        "specifications",
+        "behavior-driven-development",
+        "mermaid",
+        "documentation"
+      ],
+      "tags": [
+        "requirements",
+        "bdd",
+        "specifications",
+        "documentation",
+        "essential-developer"
+      ],
+      "source": "./"
+    }
+  ]
+}
