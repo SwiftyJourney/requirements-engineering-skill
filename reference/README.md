@@ -1,6 +1,6 @@
-# Essential App Case Study
+# Image Feed Case Study — Requirements Reference
 
-![](https://github.com/essentialdevelopercom/essential-feed-case-study/workflows/CI-iOS/badge.svg) ![](https://github.com/essentialdevelopercom/essential-feed-case-study/workflows/CI-macOS/badge.svg) ![](https://github.com/essentialdevelopercom/essential-feed-case-study/workflows/Deploy/badge.svg)
+> A worked reference of the canonical artifact format: BDD narratives, use cases, model specs, payload contracts, flowcharts, and dependency diagrams for an image-feed app.
 
 ## Image Feed Feature Specs
 

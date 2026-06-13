@@ -34,15 +34,17 @@ The same term must appear consistently across ALL artifacts:
 
 When terms diverge, ambiguity creeps in. "Feed Items" in the use case but "Feed Images" in the model creates confusion about whether these are the same concept.
 
+**The canonical term is the one the domain experts use** (ubiquitous language). Code and specs conform to the experts' vocabulary, not the other way around — when in doubt, ask what the people who own the domain call it.
+
 ---
 
 ## The Renaming Pattern
 
 Domain understanding evolves. When it does, rename **everywhere** — not just in one artifact.
 
-### Real-world example (Essential Developer Feed Case Study)
+### Real-world example (image feed case study)
 
-The project initially used "Feed Items" as the domain term. As understanding deepened, the team realized "Feed Images" better described the domain concept.
+The project initially used "Feed Items" as the domain term, then renamed to "Feed Images" — not because of the team's evolving taste, but because **"Images" is the term the domain experts use in the specs** (ubiquitous language). The source of the canonical name is the domain expert's vocabulary.
 
 **Before:**
 ```

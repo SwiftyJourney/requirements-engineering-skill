@@ -1,0 +1,49 @@
+{
+  "skill_name": "requirements-engineering",
+  "description": "Output-quality evals targeting artifacts UNIQUE to this requirements methodology, not generic BDD a bare LLM already writes. Each prompt asks the agent to specify a feature from scratch (zero fixtures). Assertions are designed to FAIL for a bare agent (which stops at generic 'As a user / Given-When-Then') and PASS only when the skill's conventions are applied: Data(Input)+numbered primary+named sad-paths+nothing-on-cancel use cases, Command/Query split into separate use cases, optionality-by-omission JSON, the four-relationship dependency notation with a legend, and one ubiquitous domain term across every artifact.",
+  "evals": [
+    {
+      "id": "saved-articles-feed-full-spec",
+      "prompt": "We want to add an offline-capable \"saved articles\" feed to our reading app. When the reader opens the Saved tab, they should see the articles they saved, and it should still work when they have no internet. Right now that's all the detail I have. Write the full feature specification for this.",
+      "expected_output": "A self-contained feature spec for the Saved Articles Feed: BDD narratives split by connectivity, and use cases for loading from remote AND from cache. The remote-load use case has an explicit Data/Input section, a NUMBERED primary (happy-path) course, named sad-path error courses for invalid data and for no connectivity, and a Cancel course whose stated behavior is that the system delivers neither data nor error. One ubiquitous domain term (e.g. \"saved articles\" / \"Saved Article\") is used across every artifact instead of generic words like \"items\".",
+      "assertions": [
+        "Contains a use case for loading saved articles from remote with a dedicated section listing its inputs, labeled 'Data' or 'Data (Input)' (not just inferred from prose)",
+        "That use case's primary/happy-path course is written as an explicitly NUMBERED, ordered list of steps, not a paragraph or unordered bullets",
+        "The primary course's final step delivers the domain output (e.g. 'System delivers saved articles')",
+        "Includes a distinctly named sad-path course for invalid/unexpected data AND a separate distinctly named sad-path course for missing connectivity; the two failure modes are NOT collapsed into one generic 'error' branch",
+        "Includes a Cancel course whose semantics are explicitly that the system delivers NOTHING — neither data nor an error; a cancel that surfaces a cancellation error or empty result FAILS this assertion",
+        "Provides separate BDD narratives for an online/connected reader and an offline reader (at least two narratives), not a single 'As a user' narrative",
+        "The offline acceptance criteria distinguish at least valid-cache vs expired-cache vs empty-cache states with an explicit age threshold (a concrete duration, not 'recent'/'old')",
+        "A single ubiquitous domain term for the entity is used consistently across the BDD, use cases, and model/contract sections; generic placeholders ('item', 'items', 'object', 'data') are NOT used as the entity name in any artifact"
+      ]
+    },
+    {
+      "id": "cqs-load-vs-validate-split",
+      "prompt": "For that saved-articles feature, here's one more rule: cached articles older than 7 days are stale and must be removed. I was going to write a single 'Load Saved Articles From Cache' use case that loads the cache, and while it's at it, checks the age and deletes the cache if it's too old. Spec out the cache side of this feature.",
+      "expected_output": "The cache behavior is modeled as TWO separate use cases following Command/Query Separation: a side-effect-free query that loads/retrieves saved articles from the cache (and does NOT delete on expiry), and a separate command (e.g. 'Validate Cache') whose sad-path courses delete the cache. The agent recognizes that load (a query) and validate-and-delete (a command with a side effect) are distinct responsibilities and resists the user's stated plan to merge them.",
+      "assertions": [
+        "Produces at least two distinct named use cases for the cache: one whose responsibility is loading/retrieving from cache, and a separate one whose responsibility is validating the cache",
+        "The load/retrieve (query) use case does NOT include any step that deletes, clears, or purges the cache — loading is side-effect-free",
+        "The validate (command) use case is where deletion lives: its sad-path course(s) for a retrieval error and/or an expired/stale cache result in the system DELETING the cache",
+        "Explicitly declines to merge load and validate into one use case, or justifies the split on Command/Query Separation / single-responsibility grounds — it does not silently follow the user's 'one use case that loads and deletes' plan",
+        "The expired-cache condition uses the explicit 7-day threshold from the prompt, expressed as an age comparison, not a vague 'stale'/'old'",
+        "Uses the same ubiquitous 'saved articles' domain term in both use cases, not a renamed generic term"
+      ]
+    },
+    {
+      "id": "articles-payload-contract-and-deps",
+      "prompt": "Now nail down the data side and the architecture for the saved-articles feed. The backend returns a list of articles; every article has an id, a title, and an image url, but only SOME articles have a subtitle and only some have an author name. Give me the model spec, the API response contract, and an architecture/dependency diagram for how the modules wire together (remote loader, local cache, UI, composition root).",
+      "expected_output": "A Property/Type model-spec table for the Saved Article with subtitle and author marked optional; a payload contract showing the concrete HTTP method + path + status code and example JSON in which optionality is expressed by OMITTING subtitle/author from some example items; and a module dependency diagram using concrete module names with relationship arrows whose meaning is distinguished and explained in a legend.",
+      "assertions": [
+        "The model spec is a Property/Type TABLE (columns for property name and type), not a prose paragraph",
+        "In that table, 'subtitle' and 'author' are explicitly marked optional, while id/title/image url are not",
+        "The payload contract states an HTTP method and path AND an explicit status code (e.g. 'GET /...' with '200 RESPONSE' or '2xx RESPONSE')",
+        "The example JSON contains MULTIPLE items where the optional fields are demonstrated by OMISSION — at least one item omits 'subtitle' and at least one omits 'author', while at least one other includes them; optionality is NOT conveyed only by prose, by null, or by a single item",
+        "The dependency diagram uses concrete domain/module names (e.g. RemoteArticlesLoader, an article store, an articles UI controller, a composition root) — NOT generic labels like 'Module A'",
+        "The diagram distinguishes relationship KINDS — at minimum a conformance/implements relationship vs a depends-on relationship — using different arrow styles, and includes a LEGEND keying what each arrow means (ideally distinguishing strong vs weak dependency and conformance vs inheritance per the four-type notation)",
+        "Dependencies point toward the abstractions: the composition root depends on the concrete loaders/stores, and the concrete remote loader and local cache conform to a shared abstraction rather than the domain depending on the UI or composition root",
+        "The entity is named with the consistent 'Saved Article' domain term across the model spec, contract, and diagram; any JSON-key-to-property divergence (e.g. 'image' vs 'url') is acknowledged, not silently inconsistent"
+      ]
+    }
+  ]
+}

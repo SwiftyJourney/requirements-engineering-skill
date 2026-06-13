@@ -16,6 +16,7 @@ Jump to:
 - [Architecture Diagrams](#2-architecture-diagrams-module-dependencies)
 - [Sequence Diagrams](#3-sequence-diagrams-interaction-flow)
 - [State Diagrams](#4-state-diagrams)
+- [Dependency Diagram Notation](#dependency-diagram-notation)
 - [Drawing Conventions](#drawing-conventions)
 - [Integration with Requirements](#integration-with-requirements)
 
@@ -183,25 +184,30 @@ stateDiagram-v2
 
 ---
 
+## Dependency Diagram Notation
+
+This is the load-bearing notation of the methodology. A dependency arrow encodes **two** independent facts — the **line style** and the **arrowhead fill** — and each combination means something precise:
+
+| Line | Head | Relationship | Meaning | Swift example |
+|---|---|---|---|---|
+| solid | open / empty (△) | **inherits from / is a** | one type is a subtype of another | `class MyViewController: UIViewController` |
+| dashed | open / empty (△) | **conforms to / implements** | a type implements a protocol | `class URLSessionHTTPClient: HTTPClient` |
+| solid | **filled (▶)** | **depends on / has a** (STRONG) | the type cannot exist without the other — a stored property | `let client: HTTPClient` held by `RemoteFeedLoader` |
+| dashed | **filled (▶)** | **depends on / uses a** (WEAK) | the type uses the other but works without owning it — a method parameter | `func load(client: HTTPClient)` |
+
+The two distinctions that carry the most meaning, and that generic "boxes and arrows" miss:
+
+- **Head fill = inheritance/conformance vs. dependency.** Open head = "is a / conforms to". Filled head = "depends on".
+- **Line style (on a filled head) = strong vs. weak dependency.** Solid = strong (a stored `let`, association/aggregation/composition — you cannot construct the type without it). Dashed = weak (a parameter — provided per call, the type is usable without it).
+
+Direction matters: the arrow points **toward the thing depended upon**. Always include a small legend keying these four arrows, since the head fill is easy to miss at a glance.
+
+> Mermaid can't render all four heads natively. When sketching in Mermaid, approximate (`-->` strong dependency, `-.->` weak dependency, `..|>` conformance, `--|>` inheritance) **and state the intended semantics in a legend** — the semantics above are what matter, not the exact glyph.
+
 ## Drawing Conventions
 
 ### Shape Conventions
-- **Rectangles**: Components, modules, classes
-- **Rounded rectangles**: Processes, actions
-- **Diamonds**: Decision points, conditionals
-- **Parallelograms**: Data, inputs/outputs
-- **Circles**: Start/end states
-
-### Arrow Styles
-- **Solid arrows** (`-->`): Direct dependencies, data flow
-- **Dashed arrows** (`-.->` or `-.->`): Creation, composition
-- **Dotted arrows** (`<|..`): Protocol conformance, interfaces
-
-### Color Coding (optional)
-- **Green**: Happy path, success states
-- **Red**: Error states, error handlers
-- **Blue**: Data sources, external systems
-- **Orange/Yellow**: Alternative paths, caching layers
+- **Rectangles**: components / types. **Diamonds**: decision points. **Circles**: start/end. (Standard flowchart shapes — don't over-think them.)
 
 ---
 

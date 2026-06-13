@@ -7,7 +7,7 @@ Use this when:
 - Understanding how requirements map to architecture and tests
 
 Skip this file if:
-- You need a specific artifact template. Check `_index.md` for the right reference.
+- You need a specific artifact template. Check the Reference Router in `SKILL.md` for the right file.
 
 Jump to:
 - [Feature Specification Block](#feature-specification-block)
@@ -20,7 +20,9 @@ Jump to:
 
 ## Feature Specification Block
 
-Each feature is a **self-contained block** with all 7 artifacts. This block can be understood independently — a developer reading just the Feed feature spec has everything needed to implement it.
+Each feature is a **self-contained block** with the artifacts it warrants. This block can be understood independently — a developer reading just the Feed feature spec has everything needed to implement it.
+
+> **Include the artifacts the feature needs — not a mandatory seven.** Default to the full set for a non-trivial networked feature, but omit the ones that don't apply. The real Image Comments feature (Phase 4 below) is online-only, so it has **one** narrative, **one** use case, **no** cache/validate use cases, and **no** Cancel course — and that is correct. A feature reusing an existing model needs **no** new Model Spec. The architecture diagram is **app-level** and shared (see below), not one-per-feature.
 
 **Structure of one feature block:**
 
@@ -61,11 +63,13 @@ Then [outcome]
 [HTTP method + path + JSON]
 
 ## Flowchart
-[Mermaid]
+[Mermaid — per feature]
 
 ## Architecture
-[Module dependency diagram]
+[App-level module dependency diagram — one shared graph, updated as modules are added]
 ```
+
+> **Flowchart vs Architecture diagram.** The flowchart is **per feature** (one decision flow per feature). The architecture diagram is **app-level**: a single shared dependency graph for the whole system, updated each time a new module lands (the case study kept it as one exported image at the bottom of the README, not one-per-feature). When you "add Architecture to a feature block," you are really updating the shared app diagram to include that feature's module.
 
 ---
 
@@ -73,7 +77,7 @@ Then [outcome]
 
 Features are added as **independent blocks** without disrupting existing specifications.
 
-### Example: Essential Developer Feed Case Study progression
+### Example: image feed case study progression
 
 **Phase 1 — Image Feed Feature:**
 - BDD: 2 narratives (online customer, offline customer)
@@ -98,7 +102,7 @@ Features are added as **independent blocks** without disrupting existing specifi
 - Payload: `GET /image/{image-id}/comments`
 - Architecture diagram updated to show parallel Comments module
 
-**Key pattern**: Each phase adds a self-contained block. Existing specifications are only modified when understanding of existing features changes (e.g., extracting Validate Cache).
+**Key pattern**: Each phase adds a self-contained block. Existing specifications are only modified when understanding of existing features changes (e.g., extracting Validate Cache). Note Phase 4 deliberately ships **fewer** artifacts than Phase 1 — online-only, so no offline narrative, no cache/validate use cases, no Cancel course. Artifact count follows the feature's behavior, not a fixed quota.
 
 ---
 
@@ -122,6 +126,8 @@ Every requirement artifact maps to a concrete implementation artifact:
 | Architecture Diagram | Module structure / SPM targets | `EssentialFeed`, `EssentialFeediOS` |
 
 **Traceability principle**: If you can't point from a requirement artifact to code and back, something is missing.
+
+> The "Maps to in Code" column is illustrative of the handoff target, not a prescription for *how* to implement. The implementation patterns (composition root, `Sendable`/`@MainActor`, SPM target layout, `Task.isCancelled`) belong to the **ios-architecture-expert** skill — this skill stops at the specification and hands off there.
 
 ---
 
@@ -246,7 +252,7 @@ flowchart TD
     HasCache -->|No| Error[Show error]
 ```
 
-## Architecture
+## Architecture (app-level — update the shared diagram, don't make a new one per feature)
 
 ```mermaid
 graph TB
@@ -273,15 +279,17 @@ graph TB
 
 ## Guardrails
 
-- Do not add a feature without ALL 7 artifacts — incomplete specs lead to incomplete implementations
+- Do not pad a feature with artifacts it doesn't need — include the ones its behavior warrants (an online-only feature needs no offline narrative, cache use case, or Cancel course; a feature reusing a model needs no new Model Spec)
+- Do not draw a separate architecture diagram per feature — there is ONE shared app-level dependency graph; update it as modules are added
 - Do not modify existing feature specs unless the understanding of that feature has changed
 - Do not break traceability — every requirement must map to testable code
 - Do not write specifications that can only be understood with additional context — each feature block must be self-contained
 
 ## Verification
 
-- [ ] Feature specification includes all 7 artifacts
+- [ ] Feature specification includes the artifacts the feature warrants (full set for a non-trivial networked feature; fewer for online-only / model-reusing features)
 - [ ] Feature block is self-contained (can be understood independently)
+- [ ] Architecture diagram is the shared app-level graph (not a per-feature one)
 - [ ] Each use case has Data, Primary, Error, and Cancel courses where applicable
 - [ ] Model Specs use Property/Type tables
 - [ ] Payload Contract shows HTTP method, path, status code, and JSON

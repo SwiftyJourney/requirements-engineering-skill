@@ -77,6 +77,8 @@ CORRECT: Property/Type table
 
 Payload Contracts define the **exact HTTP interface** between client and server.
 
+**Contracts enable parallel development.** The payload contract is the boundary — the agreed input/output — between two components. The backend **produces** it; the client (frontend) **consumes** it. Agreeing on the contract first lets the backend and frontend teams build **in parallel**, before either side exists, because each codes against the contract rather than against the other's implementation.
+
 ```
 ### Payload contract
 
@@ -103,6 +105,14 @@ GET /[resource]
 - Include example JSON with realistic values
 - Demonstrate optional fields by **omission** — show some items with the field, some without
 - Nested objects must match their Model Spec table
+
+---
+
+## Abstract Core
+
+A feature's **Abstract Core** is its interfaces and data types **only** — no implementation. It is the same boundary/contract layer the Model Specs and Payload Contracts describe, expressed for the code: the types that flow across the boundary and the interfaces that produce/consume them.
+
+Build **from** the Abstract Core outward. Start with the module that has **zero dependencies** (the abstract core / feature interfaces), then add the concrete pieces around it. Keep this layer **100% open to change**, especially early — the abstract core becomes more concrete as the team test-drives implementations against it.
 
 ---
 
@@ -196,6 +206,8 @@ GET /image/{image-id}/comments
 | `200 RESPONSE` | Exact status code required | When the API always returns 200 on success |
 | `2xx RESPONSE` | Any success status acceptable | When the API may return 200, 201, 204, etc. |
 | `404 RESPONSE` | Resource not found | Document in Error courses of use cases |
+
+The strictness is **per-endpoint**: the same API can require an exact code on one resource and accept any success on another — e.g. the feed endpoint accepts **exactly `200`**, while the comments endpoint accepts **any `2xx`**.
 
 ---
 

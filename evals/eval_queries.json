@@ -1,0 +1,22 @@
+[
+  { "query": "This Jira ticket just says 'users should be able to see their stuff offline' — my PM wants me to make it buildable before sprint planning. Can you pin down exactly what we're shipping?", "should_trigger": true, "split": "train" },
+  { "query": "Can you write up the As a / I want / So that narrative plus the Given/When/Then scenarios for our image feed feature?", "should_trigger": true, "split": "train" },
+  { "query": "We keep arguing about what 'load the feed' actually means. I need a use case with the happy path and every error course nailed down — offline, expired token, empty response.", "should_trigger": true, "split": "train" },
+  { "query": "Before we build this, define the data contract: the GET endpoint, status codes, and the JSON the backend returns, including which fields are optional.", "should_trigger": true, "split": "train" },
+  { "query": "turn this lousy one-liner requirement into something my team can actually estimate and test", "should_trigger": true, "split": "train" },
+  { "query": "Draw me a flowchart of the decision flow for the checkout feature including the failure and retry branches, and a model spec table for the Order entity.", "should_trigger": true, "split": "train" },
+  { "query": "The stakeholders described the comments feature in business terms. I need acceptance criteria with concrete user types so QA has something to test against.", "should_trigger": true, "split": "train" },
+  { "query": "what questions should I be asking to make this half-baked feature request unambiguous before any code gets written?", "should_trigger": true, "split": "validation" },
+  { "query": "Spec out the password-reset feature end to end so it's implementable — who the users are, the steps, the contract, and how it can fail.", "should_trigger": true, "split": "validation" },
+  { "query": "Our product brief for 'favorites' is too open to interpretation. Help me make it precise and testable.", "should_trigger": true, "split": "validation" },
+  { "query": "Wire up the composition root for this app and inject the dependencies into the feed loader.", "should_trigger": false, "split": "train" },
+  { "query": "Write the SwiftUI view for the feed screen with a list, loading state, and pull-to-refresh.", "should_trigger": false, "split": "train" },
+  { "query": "Migrate these XCTest cases to Swift Testing with #expect and #require.", "should_trigger": false, "split": "train" },
+  { "query": "Where should the networking code live and how do I split this monolith into Swift packages with protocol boundaries?", "should_trigger": false, "split": "train" },
+  { "query": "My view controller is 800 lines and untestable — how do I break it up and add test doubles?", "should_trigger": false, "split": "train" },
+  { "query": "Implement the URLSession HTTP client and decode this JSON into my Feed model.", "should_trigger": false, "split": "train" },
+  { "query": "Fix this Sendable warning at my actor boundary and make the mapper @MainActor.", "should_trigger": false, "split": "validation" },
+  { "query": "MVVM vs MVP for this screen — which should I actually use and why?", "should_trigger": false, "split": "validation" },
+  { "query": "Add accessibility labels and Dynamic Type support to my SwiftUI settings view.", "should_trigger": false, "split": "validation" },
+  { "query": "Write a parameterized Swift Testing suite covering the date-formatter edge cases.", "should_trigger": false, "split": "validation" }
+]

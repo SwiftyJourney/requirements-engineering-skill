@@ -15,7 +15,7 @@ Jump to:
 - [Course Types](#course-types)
 - [Separation of Concerns](#separation-of-concerns)
 - [Common Patterns](#common-use-case-patterns)
-- [Complete Examples](#complete-examples-essential-developer)
+- [Complete Examples](#complete-examples)
 
 ---
 
@@ -76,6 +76,8 @@ The Cancel course is a **first-class requirement**, not an afterthought. Any ope
 
 Use cases should have a **single responsibility**. When a use case mixes multiple concerns, split it.
 
+> **Command/Query Separation (CQS)** is the principle behind the most common split. A **query** returns data and has **no side effects** (Load). A **command** causes a side effect and returns nothing meaningful (Validate, which *deletes* the cache). The moment you catch a query mutating state — a Load step that deletes — that is the signal to extract the mutation into a separate command use case.
+
 ### Decision table
 
 | Signal | Action |
@@ -126,7 +128,9 @@ Use cases should have a **single responsibility**. When a use case mixes multipl
 1. System deletes cache.
 ```
 
-**Why separate**: Loading and validation can happen at different times. Loading happens on user request. Validation can happen in the background (e.g., when the app resigns active). Separating them enables independent testing and independent triggering.
+**Why separate**: Load is a side-effect-free **query**; deleting the cache is a **command**. They also have different triggers — loading happens on user request, validation runs in the background (e.g., when the app resigns active) — so they are different use cases (CQS).
+
+> **How this actually evolved (a useful cautionary tale):** in the case study the deletion side-effect was first *added to* `Load Feed From Cache`'s retrieval-error course — the Load query started deleting. One revision later the team pulled it back out into a dedicated `Validate Feed Cache` use case, recognizing that delete-on-failure is a *command* that doesn't belong on the *read* path. Lesson: a query that mutates state is the smell; that is exactly when you extract.
 
 ---
 
@@ -176,6 +180,8 @@ Expired cache course (sad path):
 Empty cache course (sad path):
 1. System delivers no [resource].
 ```
+
+> **Collection vs single keyed resource.** For a *collection* load (the feed), an empty or expired cache is an **empty success** — "System delivers no feed images", no error. For a *single keyed resource* (e.g. image data for one URL), an empty/missing cache is a **not-found error** — "System delivers not-found error", not an empty result. Same surface symptom ("nothing in the cache"), deliberately different modeling.
 
 ### Data Persistence / Caching
 ```
@@ -239,11 +245,11 @@ Duplicate detected -- error course:
 
 ### CRUD — Read / Update / Delete
 
-Follow the same pattern: Data section -> Primary course -> Error courses. See the CRUD pattern in the v1 reference for Read, Update, Delete templates.
+Follow the same pattern: Data section -> Primary course -> Error courses. Read is a query (no side effects); Update and Delete are commands (each needs its own not-found / conflict error courses).
 
 ---
 
-## Complete Examples (Essential Developer)
+## Complete Examples
 
 ### Load Feed From Remote Use Case
 

@@ -43,6 +43,8 @@ And [additional expected outcomes]
 
 ## Common Narrative Patterns
 
+Split a feature's narratives by the dimension that actually changes behavior — most often connectivity. Each user type that experiences the feature differently gets its own narrative.
+
 ### Online/Connected Users
 ```
 As an online customer
@@ -55,20 +57,6 @@ So I can [benefit]
 As an offline customer
 I want the app to [fallback behavior]
 So I can [benefit despite lack of connectivity]
-```
-
-### Power Users/Advanced Features
-```
-As an experienced user
-I want to [advanced capability]
-So I can [efficiency/productivity gain]
-```
-
-### New Users/Onboarding
-```
-As a new user
-I want [guided experience]
-So I can [learn/get started quickly]
 ```
 
 ---
@@ -136,6 +124,8 @@ Given the customer doesn't have connectivity
 - Three scenarios cover all cache states: valid cache, expired cache, empty cache
 - Each scenario results in a distinct behavior
 
+**Acceptance criteria are living specifications — they expand as edge cases surface.** This block did not start at three scenarios. The offline path began as a single "cache empty -> error" scenario. During clarification the seven-day max-age rule was discovered, which split that one scenario into three: valid (less than seven days old) -> show saved feed; expired (seven days or older) -> error; empty -> error. The threshold was not in the original requirement — surfacing it forced the new scenarios. Expect the same on real features: each clarified rule tends to add, not just refine, acceptance criteria.
+
 ---
 
 ## Single vs Multiple Narratives
@@ -177,7 +167,7 @@ So I can see how people are engaging with images in my feed
 
 ## Complete Examples
 
-### Example 1: Image Feed Feature (from Essential Developer)
+### Example 1: Image Feed Feature (Worked Example: Image Feed)
 
 **Story: Customer requests to see their image feed**
 
@@ -203,27 +193,9 @@ I want the app to show the latest saved version of my image feed
 So I can always enjoy images of my friends
 ```
 
-**Scenarios (Acceptance criteria)**
-```
-Given the customer doesn't have connectivity
-  And there's a cached version of the feed
-  And the cache is less than seven days old
- When the customer requests to see the feed
- Then the app should display the latest feed saved
+**Scenarios (Acceptance criteria)**: the three offline cache scenarios (valid / expired / empty) are the canonical block in [Cache-Specific Acceptance Criteria](#cache-specific-acceptance-criteria).
 
-Given the customer doesn't have connectivity
-  And there's a cached version of the feed
-  And the cache is seven days old or more
- When the customer requests to see the feed
- Then the app should display an error message
-
-Given the customer doesn't have connectivity
-  And the cache is empty
- When the customer requests to see the feed
- Then the app should display an error message
-```
-
-### Example 2: Image Comments Feature (from Essential Developer)
+### Example 2: Image Comments Feature
 
 **Story: Customer requests to see image comments**
 

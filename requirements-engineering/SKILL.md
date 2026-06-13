@@ -1,24 +1,28 @@
 ---
 name: requirements-engineering
-description: >
-  Transform vague or incomplete requirements into well-defined, testable
-  specifications using BDD (Behavior-Driven Development), Use Cases,
-  Model Specs, Payload Contracts, flowcharts, and architecture diagrams.
-  Use this skill when users need help with (1) Refining unclear or "lousy"
-  requirements, (2) Writing user stories with clear narratives and acceptance
-  criteria, (3) Creating use cases for software features, (4) Defining model
-  specs and payload contracts, (5) Generating flowcharts and architecture
-  diagrams, (6) Bridging technical and business requirements, or
-  (7) Converting feature ideas into implementable specifications.
+description: >-
+  Use this skill to turn vague, ambiguous, or "lousy" requirements into precise,
+  testable specifications BEFORE any code is written -- even when the user never
+  says "BDD", "use case", or "acceptance criteria". Trigger when someone has a
+  half-baked feature idea, an under-specified ticket, or a business brief that's
+  "open to interpretation" and needs it pinned down: clarifying questions,
+  As-a/I-want/So-that narratives, Given/When/Then acceptance criteria, use cases
+  (data inputs, happy path, error and cancel courses), model-spec tables,
+  request/response payload contracts, flowcharts, and module-dependency diagrams.
+  This is the SPECIFICATION altitude -- WHAT to build and the contracts to honor.
+  Hand off the implementation to the iOS architecture skill (composition root,
+  layers, packages, concurrency), SwiftUI view code, and Swift Testing syntax --
+  do NOT use this skill to write or refactor that code, only to define what it
+  must satisfy.
 ---
 
-# Requirements Engineering — Essential Developer Methodology
+# Requirements Engineering
 
 ## Agent Behavior Contract
 
 When this skill is active, follow these rules **strictly**:
 
-1. **Every feature specification must include all 7 artifacts**: BDD Narrative, Acceptance Criteria, Use Cases, Model Specs, Payload Contract, Flowchart, Architecture Diagram.
+1. **Include the artifacts the feature warrants** — the full set (BDD Narrative, Acceptance Criteria, Use Cases, Model Specs, Payload Contract, Flowchart, Architecture Diagram) for a non-trivial networked feature, but omit ones that don't apply: an online-only feature needs no offline narrative, cache use case, or Cancel course; a feature reusing a model needs no new Model Spec. The architecture diagram is one shared **app-level** graph, not one per feature.
 2. **Never accept vague requirements without asking clarifying questions first** — Who are the user types? What happens offline? What are the error cases?
 3. **Use domain-specific language consistently across all artifacts** — if the domain says "image feed" not "feed items", use "image feed" everywhere.
 4. **Every use case must have a Data section** listing ALL inputs, a Primary course, at least one Error course, and a Cancel course where applicable.
@@ -43,9 +47,20 @@ When this skill is active, follow these rules **strictly**:
 
 ---
 
+## Gotchas
+
+- **Dependency-arrow notation carries two facts, not one.** Head fill = "is-a/conforms-to" (open) vs. "depends-on" (filled); line style on a filled head = strong (solid, a stored `let`) vs. weak (dashed, a method parameter). Four meanings, easy to get wrong — always include a legend. See `references/diagrams.md`.
+- **A query that mutates state is the smell.** Load is a side-effect-free query; deleting the cache is a command — split them (CQS). The case study briefly put a delete on the Load path, then extracted `Validate Cache`. See `references/use-cases.md`.
+- **Collection-empty ≠ single-resource-empty.** An empty/expired *collection* cache is an empty success ("delivers no images"); an empty *single keyed resource* (image data by URL) is a **not-found error**.
+- **Optionality is shown by omission, not prose.** In payload-contract JSON, include the optional field in some example items and omit it from others — never write "(optional)" only in prose or use `null`.
+- **The canonical domain term is the domain experts' word**, not the team's preference (ubiquitous language). "Images" replaced "Items" because that's what the experts call them.
+- **Artifact count follows behavior, not a quota.** Don't pad an online-only feature with offline narratives and Cancel courses to "complete the seven".
+
+---
+
 ## Feature Specification Artifacts
 
-Each feature must be self-contained with these 7 artifacts:
+A feature draws from this catalog of artifacts — use the ones its behavior warrants (the full set for a non-trivial networked feature; fewer for online-only or model-reusing features):
 
 | # | Artifact | Purpose | Template |
 |---|---|---|---|
@@ -97,7 +112,7 @@ When reviewing a feature specification:
 6. Payload Contract shows HTTP method, path, status code, and example JSON
 7. Flowchart includes error/fallback branches (not just happy path)
 8. Architecture diagram shows module dependencies (not generic boxes)
-9. Domain terminology is consistent across all 7 artifacts
+9. Domain terminology is consistent across every artifact
 10. Feature specification is self-contained (could be understood independently)
 
 ---
@@ -118,5 +133,3 @@ Open the smallest reference that matches the question:
   - [domain-language.md](references/domain-language.md) — terminology alignment, renaming patterns
 - **Workflow**
   - [feature-specification-workflow.md](references/feature-specification-workflow.md) — end-to-end feature spec, traceability
-- **Navigation index**
-  - [references/_index.md](references/_index.md)

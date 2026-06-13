@@ -1,6 +1,6 @@
 # Requirements Engineering Skill
 
-A Claude Code skill that transforms vague or incomplete requirements into well-defined, testable specifications using BDD, Use Cases, Model Specs, Payload Contracts, flowcharts, and architecture diagrams. Based on the [Essential Developer](https://www.essentialdeveloper.com) methodology.
+A Claude Code skill that transforms vague or incomplete requirements into well-defined, testable specifications using BDD, Use Cases, Model Specs, Payload Contracts, flowcharts, and architecture diagrams.
 
 ## Who is this for?
 
@@ -50,7 +50,7 @@ Every feature specification includes these artifacts:
 5. **Model & Contract** — Property/Type tables and JSON payloads
 6. **Visualize & Document** — Diagrams and feature specification
 
-### Key Patterns from Essential Developer
+### Key Patterns
 
 - **Cancel courses** — First-class cancellation requirements for async operations
 - **Separation of concerns** — Extract focused use cases (Load vs Validate vs Cache)
@@ -62,15 +62,15 @@ Every feature specification includes these artifacts:
 
 ```
 requirements-engineering/
-├── SKILL.md                             # Hub (~140 lines)
+├── SKILL.md                             # Hub + diagnostic table + gotchas + reference router
 └── references/
-    ├── _index.md                        # Navigation hub
     ├── bdd-narratives.md                # BDD stories, narratives, acceptance criteria
-    ├── use-cases.md                     # Use case structure, courses, separation of concerns
-    ├── model-specs-and-contracts.md     # Model specs, payload contracts, JSON examples
-    ├── diagrams.md                      # Flowcharts, architecture, sequence, state diagrams
-    ├── domain-language.md               # Terminology alignment, renaming patterns
+    ├── use-cases.md                     # Use case structure, courses, CQS, separation of concerns
+    ├── model-specs-and-contracts.md     # Model specs, payload contracts, abstract core, JSON examples
+    ├── diagrams.md                      # Flowcharts, four-type dependency notation, architecture, state
+    ├── domain-language.md               # Terminology alignment, ubiquitous language, renaming
     └── feature-specification-workflow.md # End-to-end workflow, traceability
+evals/                                   # Trigger eval queries + output-quality test cases
 ```
 
 ## Related Skills
@@ -79,7 +79,7 @@ requirements-engineering/
 
 ## Credits
 
-Requirements methodology extracted from the [iOS Lead Essentials](https://www.essentialdeveloper.com/ios-lead-essentials) program by [Essential Developer](https://www.essentialdeveloper.com). The Essential Feed Case Study README demonstrates the canonical artifact format.
+Requirements methodology and artifact format distilled from a real-world iOS case study (an image-feed app) whose README documents the canonical BDD narratives, use cases, payload contracts, and dependency diagrams.
 
 ## License
 
