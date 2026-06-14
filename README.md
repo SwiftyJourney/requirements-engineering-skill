@@ -1,4 +1,7 @@
-# Requirements Engineering Skill
+# Requirements Engineering Agent Skill
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Agent Skills](https://img.shields.io/badge/Agent-Skills-blue)](https://agentskills.io)
 
 A Claude Code skill that transforms vague or incomplete requirements into well-defined, testable specifications using BDD, Use Cases, Model Specs, Payload Contracts, flowcharts, and architecture diagrams.
 
@@ -75,7 +78,10 @@ evals/                                   # Trigger eval queries + output-quality
 
 ## Related Skills
 
-- [ios-architecture-expert](https://github.com/SwiftyJourney/ios-architecture-expert-skill) — Clean architecture, composition root, generic presenters
+- [iOS Architecture Expert](https://github.com/SwiftyJourney/ios-architecture-expert-skill) — Clean modular architecture: composition root, protocol boundaries, generic presenters, Swift 6 concurrency
+- [SwiftUI Expert](https://github.com/SwiftyJourney/swiftui-expert-skill) — SwiftUI view code: state, composition, performance, animations, accessibility
+- [SwiftUI ⇄ UIKit Interop](https://github.com/SwiftyJourney/swiftui-uikit-interop-skill) — Bridge SwiftUI and UIKit: hosting controllers, representables, data across the boundary
+- [Swift Language Expert](https://github.com/SwiftyJourney/swift-language-expert-skill) — Non-obvious Swift language & standard-library techniques
 
 ## Credits
 
