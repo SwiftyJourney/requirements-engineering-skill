@@ -30,10 +30,16 @@ We welcome:
 
 ## Areas to Contribute
 
-- **BDD Templates** (`requirements-engineering/references/bdd_templates.md`)
-- **Use Cases** (`requirements-engineering/references/usecase_templates.md`)
-- **Diagrams** (`requirements-engineering/references/diagram_guide.md`)
-- **Scripts** (`requirements-engineering/scripts/`)
+- **Skill hub** (`requirements-engineering/SKILL.md`)
+- **Clarifying questions** (`requirements-engineering/references/clarifying-questions.md`)
+- **BDD narratives & criteria** (`requirements-engineering/references/bdd-narratives.md`)
+- **Use cases** (`requirements-engineering/references/use-cases.md`)
+- **Model specs & contracts** (`requirements-engineering/references/model-specs-and-contracts.md`)
+- **Diagrams** (`requirements-engineering/references/diagrams.md`)
+- **Domain language** (`requirements-engineering/references/domain-language.md`)
+- **Workflow** (`requirements-engineering/references/feature-specification-workflow.md`)
+- **Worked case study** (`reference/README.md`)
+- **Evals** (`evals/eval_queries.json`, `evals/evals.json`)
 
 ## Testing
 

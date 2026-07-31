@@ -79,30 +79,24 @@ Features are added as **independent blocks** without disrupting existing specifi
 
 ### Example: image feed case study progression
 
-**Phase 1 — Image Feed Feature:**
-- BDD: 2 narratives (online customer, offline customer)
-- Use Cases: Load Feed From Remote, Load Feed From Cache, Cache Feed
-- Model: Feed Image (id, description, location, url)
-- Payload: `GET /feed`
+The real case-study README grew over ~2 years, and its git history is the honest picture of how a specification actually evolves — not a clean four-phase drop, but a sequence of clarifications, renames, and extractions. The material commits (paraphrased messages verbatim):
 
-**Phase 2 — Feed Image Data (added later, no existing specs changed):**
-- Use Cases: Load Feed Image Data From Remote, Load Feed Image Data From Cache, Cache Feed Image Data
-- Added Cancel course: "System does not deliver image data nor error"
-- No new model spec needed (uses binary `Data`)
+| When | Commit message | What changed in the spec |
+|---|---|---|
+| Start | "Initial commit with feature requirements" | Both narratives (online **and** offline) land together; three use cases (Load Feed, Load Feed Fallback (Cache), Save Feed Items); Feed Item model with `imageURL`; payload `GET *url* (TBD)`. Offline AC has only **two** scenarios — no seven-day rule yet. |
+| +2 mo | "Clarify caching requirements" | Offline AC expands **2 -> 3 scenarios** (the seven-day expiry is *discovered* here); use cases renamed to Load Feed **From Remote** / **From Cache** / **Cache Feed**; error courses made specific (invalid-data, connectivity). |
+| +1 wk | "Remove references of 'Items' in favor of 'Images' ... used by domain experts" | Domain rename across every artifact: "Feed Items" -> "Image Feed"; model "Feed Item" -> "Feed Image"; property `imageURL` -> `url`. |
+| +1 mo | "Extract 'Validate Feed Cache Use Case' ... from 'Load Feed From Cache Use Case'" | The cache-deletion side effect is pulled out of the Load (query) into a new Validate (command) use case — separation of concerns (CQS). |
+| +6 mo | "Add `Load Feed Image Data` use cases" | The per-image binary layer: Load Feed Image Data From Remote/From Cache, introducing the **Cancel course** ("does not deliver image data nor error"). |
+| +2 wk | "Add 'Cache Feed Image Data Use Case'" | Completes the image-data trio. |
+| +1 yr | "Update README with comments feature and new architecture diagram" | A whole independent **Image Comments** feature block (1 narrative, 1 use case, ImageComment + Author models); the feed payload URL is finalized `TBD` -> `GET /feed`. |
 
-**Phase 3 — Validate Cache (extracted from Load Feed From Cache):**
-- Separated "Validate Feed Cache" as its own use case
-- Original "Load Feed From Cache" kept its loading responsibility
-- Demonstrates separation of concerns in requirements
+Read as conceptual phases, that history is: **(1)** the Feed feature; **(2)** clarify + rename + extract Validate (all *before* any image-data work); **(3)** the image-data layer with its Cancel course; **(4)** the independent Comments feature. The idealized "add a clean block per feature" is only half the story — just as much of the evolution is *refining* an existing block (expanding AC, renaming terms, extracting a use case) as *adding* a new one.
 
-**Phase 4 — Image Comments Feature (completely independent block):**
-- BDD: 1 narrative (online customer only — no offline support needed)
-- Use Cases: Load Image Comments From Remote
-- Model: ImageComment (id, message, created_at, author), CommentAuthor (username)
-- Payload: `GET /image/{image-id}/comments`
-- Architecture diagram updated to show parallel Comments module
-
-**Key pattern**: Each phase adds a self-contained block. Existing specifications are only modified when understanding of existing features changes (e.g., extracting Validate Cache). Note Phase 4 deliberately ships **fewer** artifacts than Phase 1 — online-only, so no offline narrative, no cache/validate use cases, no Cancel course. Artifact count follows the feature's behavior, not a fixed quota.
+**Key patterns:**
+- Each new feature is a self-contained block; existing specs are modified only when understanding of that feature changes (the AC expansion, the rename, the Validate extraction).
+- The Comments feature deliberately ships **fewer** artifacts than the Feed — online-only, so no offline narrative, no cache/validate use cases, no Cancel course. Artifact count follows behavior, not a quota.
+- Commit the spec change with the same discipline as code, using messages that name the *requirements* decision ("Clarify caching requirements", "Extract ... Use Case") — the git log then reads as the story of how understanding evolved.
 
 ---
 
@@ -134,6 +128,8 @@ Every requirement artifact maps to a concrete implementation artifact:
 ## Living Specification
 
 Requirements evolve with code. The specification is never "done" — it is a living document.
+
+> **Contracts sharpen last.** A payload contract can legitimately begin as `GET *url* (TBD)` and stay that way for a long time — in the case study the feed URL was `TBD` for nearly two years before it was finalized to `GET /feed`. The *shape* (status code, keys, optionality, nesting) is agreed early because that is what unblocks parallel work; the concrete endpoint can be filled in once the backend confirms it. Marking a field `TBD` is a valid specification state, not an omission.
 
 ### When to update specifications
 

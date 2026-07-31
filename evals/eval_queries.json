@@ -4,6 +4,7 @@
   { "query": "We keep arguing about what 'load the feed' actually means. I need a use case with the happy path and every error course nailed down — offline, expired token, empty response.", "should_trigger": true, "split": "train" },
   { "query": "Before we build this, define the data contract: the GET endpoint, status codes, and the JSON the backend returns, including which fields are optional.", "should_trigger": true, "split": "train" },
   { "query": "turn this lousy one-liner requirement into something my team can actually estimate and test", "should_trigger": true, "split": "train" },
+  { "query": "The ticket just says 'As a user I want to load the feed so I can see the feed' — walk me through what's wrong with it and what I should nail down before building.", "should_trigger": true, "split": "train" },
   { "query": "Draw me a flowchart of the decision flow for the checkout feature including the failure and retry branches, and a model spec table for the Order entity.", "should_trigger": true, "split": "train" },
   { "query": "The stakeholders described the comments feature in business terms. I need acceptance criteria with concrete user types so QA has something to test against.", "should_trigger": true, "split": "train" },
   { "query": "what questions should I be asking to make this half-baked feature request unambiguous before any code gets written?", "should_trigger": true, "split": "validation" },

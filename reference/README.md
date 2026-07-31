@@ -35,13 +35,13 @@ So I can always enjoy images of my friends
 
 ```
 Given the customer doesn't have connectivity
-  And there’s a cached version of the feed
+  And there's a cached version of the feed
   And the cache is less than seven days old
  When the customer requests to see the feed
  Then the app should display the latest feed saved
 
 Given the customer doesn't have connectivity
-  And there’s a cached version of the feed
+  And there's a cached version of the feed
   And the cache is seven days old or more
  When the customer requests to see the feed
  Then the app should display an error message
@@ -190,7 +190,19 @@ Given the customer doesn't have connectivity
 
 ## Flowchart
 
-![Feed Loading Feature](feed_flowchart.png)
+```mermaid
+flowchart TD
+    Start[Show feed screen] --> Fetch[Fetch new items]
+    Fetch --> Success{Success?}
+    Success -->|Yes| Cache[Cache new items]
+    Success -->|No| LoadCache[Load items from cache]
+    Cache --> Update[Update feed screen]
+    LoadCache --> HasCache{Has cache?}
+    HasCache -->|Yes| Update
+    HasCache -->|No| Error[Show error message]
+    Update --> End[End]
+    Error --> End
+```
 
 ## Model Specs
 
@@ -216,7 +228,7 @@ GET /feed
 			"id": "a UUID",
 			"description": "a description",
 			"location": "a location",
-			"image": "https://a-image.url",
+			"image": "https://a-image.url"
 		},
 		{
 			"id": "another UUID",
@@ -232,7 +244,6 @@ GET /feed
 			"id": "yet another UUID",
 			"image": "https://yet-another-image.url"
 		}
-		...
 	]
 }
 ```
@@ -247,7 +258,7 @@ GET /feed
 
 ```
 As an online customer
-I want the app to load image commments
+I want the app to load image comments
 So I can see how people are engaging with images in my feed
 ```
 
@@ -328,8 +339,7 @@ GET /image/{image-id}/comments
 			"author": {
 				"username": "another username"
 			}
-		},
-		...
+		}
 	]
 }
 ```
@@ -338,4 +348,51 @@ GET /image/{image-id}/comments
 
 ## App Architecture
 
-![](architecture.png)
+App-level module dependency graph (one shared diagram for the whole system). Arrows point toward the thing depended upon; the Feed Feature module is the boundary — everything points at it, it depends on nothing.
+
+```mermaid
+graph TB
+    subgraph FeedFeature["Feed Feature (boundary — UI/platform agnostic)"]
+        FeedImage[Feed Image model]
+        FeedLoader[FeedLoader protocol]
+        FeedCache[FeedCache protocol]
+        CommentsLoader[ImageCommentsLoader protocol]
+    end
+
+    subgraph API["API module"]
+        RemoteFeedLoader[RemoteFeedLoader]
+        RemoteCommentsLoader[RemoteImageCommentsLoader]
+        HTTPClient[HTTPClient protocol]
+    end
+
+    subgraph Cache["Cache module"]
+        LocalFeedLoader[LocalFeedLoader]
+        FeedStore[FeedStore protocol]
+    end
+
+    subgraph UI["UI module (iOS-specific)"]
+        FeedUI[Feed UI]
+        CommentsUI[Comments UI]
+    end
+
+    subgraph Main["Main module (composition root)"]
+        Composer[Composers / adapters]
+    end
+
+    RemoteFeedLoader -.->|conforms to| FeedLoader
+    LocalFeedLoader -.->|conforms to| FeedLoader
+    LocalFeedLoader -.->|conforms to| FeedCache
+    RemoteCommentsLoader -.->|conforms to| CommentsLoader
+    RemoteFeedLoader --> HTTPClient
+    RemoteCommentsLoader --> HTTPClient
+    LocalFeedLoader --> FeedStore
+    FeedUI --> FeedLoader
+    CommentsUI --> CommentsLoader
+    Composer --> RemoteFeedLoader
+    Composer --> LocalFeedLoader
+    Composer --> RemoteCommentsLoader
+    Composer --> FeedUI
+    Composer --> CommentsUI
+```
+
+> Mermaid can't render the four distinct arrowheads of the dependency notation — `-.->` here stands for "conforms to" and `-->` for "depends on". See `../requirements-engineering/references/diagrams.md` for the full four-relationship legend.

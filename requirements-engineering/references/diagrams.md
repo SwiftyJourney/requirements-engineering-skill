@@ -11,6 +11,7 @@ Skip this file if:
 - You need use case definitions. Use `use-cases.md`.
 
 Jump to:
+- [Diagrams Are Thinking Tools](#diagrams-are-thinking-tools-not-documentation)
 - [Diagram Selection](#diagram-selection)
 - [Flowcharts](#1-flowcharts-behavioral-flow)
 - [Architecture Diagrams](#2-architecture-diagrams-module-dependencies)
@@ -19,6 +20,16 @@ Jump to:
 - [Dependency Diagram Notation](#dependency-diagram-notation)
 - [Drawing Conventions](#drawing-conventions)
 - [Integration with Requirements](#integration-with-requirements)
+
+---
+
+## Diagrams Are Thinking Tools, Not Documentation
+
+Treat a dependency or flow diagram as a **thinking and communication tool** first — a five-to-ten-minute whiteboard sketch that lets you validate a design decision, see the dependency graph, and spot coupling or retain cycles before you commit to code. It is a "framework to think", not a permanent deliverable.
+
+- **Diagrams drift from code.** The code is the source of truth; a diagram is a snapshot that goes stale the moment the code moves. Don't invest in keeping every diagram perfectly in sync — invest in the understanding it produces.
+- **Annotate only what helps.** You don't need every arrow, type, and detail. Show the relationships that clarify the design; leave out the noise.
+- **Reach for a quick sketch when reasoning about structure**, and for a committed diagram (below) only when a spec or README genuinely needs one to be understood.
 
 ---
 

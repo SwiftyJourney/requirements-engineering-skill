@@ -18,6 +18,8 @@ description: >-
 
 # Requirements Engineering
 
+> **Why this skill exists.** Good architecture is a byproduct of good requirements — you do not design it directly, you clarify the requirements until the modules, boundaries, and contracts they imply become obvious. This skill produces the WHAT (the specification and the contracts to honor); the **ios-architecture-expert** skill turns it into the HOW. Every artifact here starts from a conversation that eliminates assumptions — see `references/clarifying-questions.md`.
+
 ## Agent Behavior Contract
 
 When this skill is active, follow these rules **strictly**:
@@ -36,7 +38,8 @@ When this skill is active, follow these rules **strictly**:
 
 | Symptom | First check | Smallest fix | Deep dive |
 |---|---|---|---|
-| Requirement is "susceptible to personal interpretation" | Missing user types / scenarios | Ask clarifying questions, split into narratives | `references/bdd-narratives.md` |
+| Requirement is "susceptible to personal interpretation" | Missing user types / scenarios | Ask clarifying questions, split into narratives | `references/clarifying-questions.md` |
+| Jumped straight to artifacts without asking anything | Assumptions encoded as requirements | Run the lousy-ticket teardown first | `references/clarifying-questions.md` |
 | BDD scenario covers only happy path | Missing error/offline/edge cases | Add error courses and cancellation | `references/use-cases.md` |
 | Use case mixes multiple responsibilities | Separation of concerns | Extract into focused use cases (Load vs Validate vs Cache) | `references/use-cases.md` |
 | No data contract between frontend and backend | Missing model specs / payload | Add Property/Type table + JSON contract | `references/model-specs-and-contracts.md` |
@@ -49,6 +52,7 @@ When this skill is active, follow these rules **strictly**:
 
 ## Gotchas
 
+- **BDD's value is the conversation, not the Gherkin.** If you wrote Given/When/Then scenarios without asking a single clarifying question, you almost certainly encoded your own assumptions. Crush the assumptions first — What is a "feed"? What does "load" mean? From where? See `references/clarifying-questions.md`.
 - **Dependency-arrow notation carries two facts, not one.** Head fill = "is-a/conforms-to" (open) vs. "depends-on" (filled); line style on a filled head = strong (solid, a stored `let`) vs. weak (dashed, a method parameter). Four meanings, easy to get wrong — always include a legend. See `references/diagrams.md`.
 - **A query that mutates state is the smell.** Load is a side-effect-free query; deleting the cache is a command — split them (CQS). The case study briefly put a delete on the Load path, then extracted `Validate Cache`. See `references/use-cases.md`.
 - **Collection-empty ≠ single-resource-empty.** An empty/expired *collection* cache is an empty success ("delivers no images"); an empty *single keyed resource* (image data by URL) is a **not-found error**.
@@ -77,7 +81,7 @@ A feature draws from this catalog of artifacts — use the ones its behavior war
 ## The 6-Step Process
 
 1. **Identify** — Recognize vague requirements ("susceptible to personal interpretation")
-2. **Clarify** — Ask Who / What / Where / When / Why / How
+2. **Clarify** — Run the lousy-ticket teardown; ask Who / What / Where / When / Why / How to eliminate assumptions -> `references/clarifying-questions.md`
 3. **Specify BDD** — Write narratives and acceptance criteria -> `references/bdd-narratives.md`
 4. **Define Use Cases** — Write procedural steps with cancel courses -> `references/use-cases.md`
 5. **Model & Contract** — Create model specs and payload contracts -> `references/model-specs-and-contracts.md`
@@ -121,6 +125,8 @@ When reviewing a feature specification:
 
 Open the smallest reference that matches the question:
 
+- **Clarification**
+  - [clarifying-questions.md](references/clarifying-questions.md) — lousy-ticket teardown, question bank, answer-to-artifact mapping, BDD-as-conversation
 - **Narratives & Criteria**
   - [bdd-narratives.md](references/bdd-narratives.md) — BDD stories, user narratives, acceptance criteria, scenario patterns
 - **System Behavior**

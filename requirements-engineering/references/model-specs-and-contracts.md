@@ -106,6 +106,8 @@ GET /[resource]
 - Demonstrate optional fields by **omission** — show some items with the field, some without
 - Nested objects must match their Model Spec table
 
+> **The URL can be `TBD`.** Agree the payload *shape* before the endpoint exists — write `GET *url* (TBD)` and fully specify the status code, keys, optionality, and nesting. The shape is what unblocks parallel backend/frontend work; the concrete path is filled in once the backend confirms it. In the case study the feed contract lived as `TBD` for nearly two years before it became `GET /feed`. A `TBD` URL is a valid contract state, not an unfinished one.
+
 ---
 
 ## Abstract Core

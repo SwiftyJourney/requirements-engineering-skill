@@ -32,9 +32,9 @@ npx skills add SwiftyJourney/requirements-engineering-skill
 
 ## What the Skill Covers
 
-### The 7 Feature Specification Artifacts
+### The Feature Specification Artifacts
 
-Every feature specification includes these artifacts:
+A feature draws from this catalog — include the artifacts its behavior **warrants**, not a fixed quota. The full set fits a non-trivial networked feature; an online-only or model-reusing feature ships fewer (e.g. no offline narrative, cache use case, or Cancel course):
 
 1. **BDD Narrative** — Define who, what, why per user type
 2. **Acceptance Criteria** — Given/When/Then scenarios
@@ -55,6 +55,7 @@ Every feature specification includes these artifacts:
 
 ### Key Patterns
 
+- **Clarify before you specify** — Run the lousy-ticket teardown; BDD's value is the conversation that eliminates assumptions, not the Gherkin
 - **Cancel courses** — First-class cancellation requirements for async operations
 - **Separation of concerns** — Extract focused use cases (Load vs Validate vs Cache)
 - **Domain language alignment** — Consistent terminology across all artifacts
@@ -67,13 +68,17 @@ Every feature specification includes these artifacts:
 requirements-engineering/
 ├── SKILL.md                             # Hub + diagnostic table + gotchas + reference router
 └── references/
+    ├── clarifying-questions.md          # Lousy-ticket teardown, question bank, answer-to-artifact
     ├── bdd-narratives.md                # BDD stories, narratives, acceptance criteria
     ├── use-cases.md                     # Use case structure, courses, CQS, separation of concerns
     ├── model-specs-and-contracts.md     # Model specs, payload contracts, abstract core, JSON examples
     ├── diagrams.md                      # Flowcharts, four-type dependency notation, architecture, state
     ├── domain-language.md               # Terminology alignment, ubiquitous language, renaming
     └── feature-specification-workflow.md # End-to-end workflow, traceability
+reference/README.md                      # Worked case study (image feed + comments), all artifacts inline
+docs/                                    # Quickstart, installation, contributing
 evals/                                   # Trigger eval queries + output-quality test cases
+.claude-plugin/                          # plugin.json + marketplace.json
 ```
 
 ## Related Skills
