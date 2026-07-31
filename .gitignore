@@ -29,3 +29,6 @@ ENV/
 *.skill
 dist/
 build/
+
+# Local agent config
+.claude/

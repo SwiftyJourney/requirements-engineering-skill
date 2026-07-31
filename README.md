@@ -65,7 +65,7 @@ A feature draws from this catalog — include the artifacts its behavior **warra
 ## Skill File Structure
 
 ```
-requirements-engineering/
+skills/requirements-engineering/         # the skill — this is what ships
 ├── SKILL.md                             # Hub + diagnostic table + gotchas + reference router
 └── references/
     ├── clarifying-questions.md          # Lousy-ticket teardown, question bank, answer-to-artifact
@@ -74,11 +74,11 @@ requirements-engineering/
     ├── model-specs-and-contracts.md     # Model specs, payload contracts, abstract core, JSON examples
     ├── diagrams.md                      # Flowcharts, four-type dependency notation, architecture, state
     ├── domain-language.md               # Terminology alignment, ubiquitous language, renaming
-    └── feature-specification-workflow.md # End-to-end workflow, traceability
-reference/README.md                      # Worked case study (image feed + comments), all artifacts inline
-docs/                                    # Quickstart, installation, contributing
-evals/                                   # Trigger eval queries + output-quality test cases
-.claude-plugin/                          # plugin.json + marketplace.json
+    ├── feature-specification-workflow.md # End-to-end workflow, traceability
+    └── worked-example.md                # A complete assembled requirements set (image feed + comments)
+docs/                                    # Quickstart, installation, contributing (repo-only)
+evals/                                   # Trigger eval queries + output-quality test cases (repo-only)
+.claude-plugin/                          # plugin.json + marketplace.json (repo-only)
 ```
 
 ## Related Skills

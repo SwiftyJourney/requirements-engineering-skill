@@ -1,6 +1,8 @@
-# Image Feed Case Study — Requirements Reference
+# Worked Example — a complete requirements set
 
-> A worked reference of the canonical artifact format: BDD narratives, use cases, model specs, payload contracts, flowcharts, and dependency diagrams for an image-feed app.
+> An end-to-end reference of the canonical artifact format: BDD narratives, use cases, model specs, payload contracts, flowcharts, and the app-level dependency diagram, for an image-feed app.
+
+Use this when you want to see every artifact this skill produces, in context and at full fidelity, rather than one artifact type at a time. Each individual format is specified in its own reference file; this file shows them assembled for a real two-feature system.
 
 ## Image Feed Feature Specs
 
@@ -395,4 +397,4 @@ graph TB
     Composer --> CommentsUI
 ```
 
-> Mermaid can't render the four distinct arrowheads of the dependency notation — `-.->` here stands for "conforms to" and `-->` for "depends on". See `../requirements-engineering/references/diagrams.md` for the full four-relationship legend.
+> Mermaid can't render the four distinct arrowheads of the dependency notation — `-.->` here stands for "conforms to" and `-->` for "depends on". See [diagrams.md](diagrams.md) for the full four-relationship legend.

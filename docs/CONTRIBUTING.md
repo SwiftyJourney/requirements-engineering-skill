@@ -30,15 +30,15 @@ We welcome:
 
 ## Areas to Contribute
 
-- **Skill hub** (`requirements-engineering/SKILL.md`)
-- **Clarifying questions** (`requirements-engineering/references/clarifying-questions.md`)
-- **BDD narratives & criteria** (`requirements-engineering/references/bdd-narratives.md`)
-- **Use cases** (`requirements-engineering/references/use-cases.md`)
-- **Model specs & contracts** (`requirements-engineering/references/model-specs-and-contracts.md`)
-- **Diagrams** (`requirements-engineering/references/diagrams.md`)
-- **Domain language** (`requirements-engineering/references/domain-language.md`)
-- **Workflow** (`requirements-engineering/references/feature-specification-workflow.md`)
-- **Worked case study** (`reference/README.md`)
+- **Skill hub** (`skills/requirements-engineering/SKILL.md`)
+- **Clarifying questions** (`skills/requirements-engineering/references/clarifying-questions.md`)
+- **BDD narratives & criteria** (`skills/requirements-engineering/references/bdd-narratives.md`)
+- **Use cases** (`skills/requirements-engineering/references/use-cases.md`)
+- **Model specs & contracts** (`skills/requirements-engineering/references/model-specs-and-contracts.md`)
+- **Diagrams** (`skills/requirements-engineering/references/diagrams.md`)
+- **Domain language** (`skills/requirements-engineering/references/domain-language.md`)
+- **Workflow** (`skills/requirements-engineering/references/feature-specification-workflow.md`)
+- **Worked example** (`skills/requirements-engineering/references/worked-example.md`)
 - **Evals** (`evals/eval_queries.json`, `evals/evals.json`)
 
 ## Testing
