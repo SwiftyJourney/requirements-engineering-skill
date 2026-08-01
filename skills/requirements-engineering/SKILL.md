@@ -47,6 +47,8 @@ When this skill is active, follow these rules **strictly**:
 | Diagram shows only happy path | Missing error flows | Add error/fallback branches | `references/diagrams.md` |
 | Architecture diagram is generic boxes | Missing module dependencies | Show actual module dependency graph | `references/diagrams.md` |
 | No traceability from requirements to code | Missing artifact mapping | Map BDD -> tests, use cases -> classes | `references/feature-specification-workflow.md` |
+| A UX/design question can't be settled by discussion | It needs feedback, not another scenario | Build a throwaway prototype with realistic hard-case data | `references/feature-specification-workflow.md` |
+| "We don't have time to write specs" | What the clarification actually buys the team | Name the returns — estimation, delegation, less rework | `references/clarifying-questions.md` |
 
 ---
 
@@ -138,6 +140,6 @@ Open the smallest reference that matches the question:
 - **Domain Consistency**
   - [domain-language.md](references/domain-language.md) — terminology alignment, renaming patterns
 - **Workflow**
-  - [feature-specification-workflow.md](references/feature-specification-workflow.md) — end-to-end feature spec, traceability
+  - [feature-specification-workflow.md](references/feature-specification-workflow.md) — end-to-end feature spec, traceability, prototyping to validate a requirement
 - **Worked example**
   - [worked-example.md](references/worked-example.md) — a complete, assembled requirements set for a two-feature system: every artifact type in context. Read it when you need to see the target output at full fidelity, not one format at a time.

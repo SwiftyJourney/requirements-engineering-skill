@@ -1,6 +1,6 @@
 {
   "name": "requirements-engineering-skill",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "owner": {
     "name": "SwiftyJourney",
     "email": "jfdoradotr@icloud.com"
@@ -13,7 +13,7 @@
       "name": "requirements-engineering",
       "description": "Transform vague requirements into well-defined, testable specifications using BDD narratives, use cases, model specs, payload contracts, and diagrams.",
       "repository": "https://github.com/SwiftyJourney/requirements-engineering-skill",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "author": {
         "name": "SwiftyJourney",
         "email": "jfdoradotr@icloud.com"

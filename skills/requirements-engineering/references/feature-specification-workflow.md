@@ -10,11 +10,54 @@ Skip this file if:
 - You need a specific artifact template. Check the Reference Router in `SKILL.md` for the right file.
 
 Jump to:
+- [Prototyping to Validate a Requirement](#prototyping-to-validate-a-requirement)
 - [Feature Specification Block](#feature-specification-block)
 - [Incremental Feature Development](#incremental-feature-development)
 - [Requirements-to-Architecture Traceability](#requirements-to-architecture-traceability)
 - [Living Specification](#living-specification)
 - [Complete Feature Specification Template](#complete-feature-specification-template)
+
+---
+
+## Prototyping to Validate a Requirement
+
+Some requirements cannot be settled by conversation. "Should this be a list or a grid?", "is one
+tap enough?", "does this actually feel fast?" — these are answered by putting something in front of
+people, not by writing another scenario.
+
+A prototype is the **first iteration of a feature, built without committing real resources**. It
+exists to gather feedback from the people who will judge the result — peers, designers, product
+owners, and customers — and its logic is thrown away afterwards.
+
+**A prototype is a spike. It is never promoted to production.** When it is time to write the real
+thing, start fresh. The value already banked is the *answer*, not the code.
+
+### Prototype with integrity
+
+A prototype takes far less time and effort, but that is not licence to treat it carelessly — people
+judge the idea by what you show them, and a scrappy prototype gets the idea rejected on the wrong
+grounds. Before you put one in front of anyone:
+
+- [ ] Design polished to spec — icons, fonts, colours, margins, images, animations
+- [ ] Content localized
+- [ ] Works in every orientation you claim to support
+- [ ] The tester-invite description is detailed and specific about what you want feedback on
+- [ ] Realistic data, including the **hard** cases — long text, short text, missing fields
+
+That last one matters most for requirements work: a prototype populated with tidy sample data
+validates nothing. It is the missing description and the three-line title that surface the
+requirement you hadn't written down.
+
+> **Ship it small and often.** Releasing a running app — even a prototype or beta — daily or weekly
+> builds trust and transparency with stakeholders far more effectively than a status update does.
+> It is also the cheapest way to find out you are building the wrong thing.
+
+### What comes back is requirements
+
+Feedback on a prototype converts directly into specification artifacts. The UX goals it produces —
+"load automatically when the view appears", "allow manual reload", "show a loading indicator",
+"offer retry on failure", "preload when nearly visible" — are acceptance criteria in everything but
+formatting, and each becomes a scenario or a use-case course.
 
 ---
 

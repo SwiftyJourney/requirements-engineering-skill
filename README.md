@@ -56,6 +56,7 @@ A feature draws from this catalog — include the artifacts its behavior **warra
 ### Key Patterns
 
 - **Clarify before you specify** — Run the lousy-ticket teardown; BDD's value is the conversation that eliminates assumptions, not the Gherkin
+- **Prototype to settle what discussion can't** — A throwaway spike with hard-case data, never promoted to production
 - **Cancel courses** — First-class cancellation requirements for async operations
 - **Separation of concerns** — Extract focused use cases (Load vs Validate vs Cache)
 - **Domain language alignment** — Consistent terminology across all artifacts

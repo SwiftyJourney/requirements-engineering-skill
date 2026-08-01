@@ -33,6 +33,24 @@ Principles:
 
 > **Good architecture is a byproduct of good requirements.** You do not design the architecture directly — you clarify the requirements until the modules, boundaries, and contracts they imply become obvious. This skill produces that WHAT; the architecture skill turns it into the HOW.
 
+### What clarifying the guardrails actually buys
+
+When someone pushes back with "we don't have time for specs", these are the returns — most of them
+land on the *team*, not on the document:
+
+1. **Breaks the work into tasks** you can actually estimate, test, implement and deploy separately.
+2. **Improves your understanding** of the challenge before you are committed to a design.
+3. **Decreases the cost of context shifting** — you can leave the work and come back to a written
+   guardrail instead of reconstructing your reasoning.
+4. **Decreases miscommunication and rework**, which is where the real time goes.
+5. **Test-drives the implementation** — each course becomes a test.
+6. **Improves communication with peers** by giving everyone the same vocabulary.
+7. **Enables delegation.** You cannot hand off a task nobody can read.
+8. **Maximizes productivity** by removing the mid-implementation "wait, what should happen if…"
+9. **Documents the feature** as a side effect, at no extra cost.
+
+Point 7 is the one that usually lands: an unspecified task is one you personally have to keep.
+
 ---
 
 ## The Lousy Ticket Teardown

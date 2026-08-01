@@ -1,6 +1,6 @@
 {
   "name": "requirements-engineering",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Transform vague requirements into well-defined, testable specifications using BDD narratives, use cases, model specs, payload contracts, and diagrams.",
   "author": {
     "name": "SwiftyJourney",
