@@ -88,6 +88,7 @@ evals/                                   # Trigger eval queries + output-quality
 - [SwiftUI Expert](https://github.com/SwiftyJourney/swiftui-expert-skill) — SwiftUI view code: state, composition, performance, animations, accessibility
 - [SwiftUI ⇄ UIKit Interop](https://github.com/SwiftyJourney/swiftui-uikit-interop-skill) — Bridge SwiftUI and UIKit: hosting controllers, representables, data across the boundary
 - [Swift Language Expert](https://github.com/SwiftyJourney/swift-language-expert-skill) — Non-obvious Swift language & standard-library techniques
+- [Swift Testing Expert](https://github.com/SwiftyJourney/swift-testing-expert-skill) — Swift Testing syntax, XCTest migration, test doubles, deterministic async tests
 
 ## Credits
 
